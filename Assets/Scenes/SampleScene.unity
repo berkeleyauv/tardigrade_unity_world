@@ -515,13 +515,42 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       insertIndex: -1
       addedObject: {fileID: 98932522}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1230138d2f421ff439e396917219ce53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 929494268}
   m_SourcePrefab: {fileID: 100100000, guid: 1230138d2f421ff439e396917219ce53, type: 3}
 --- !u!4 &929494266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
   m_PrefabInstance: {fileID: 929494265}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &929494267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1230138d2f421ff439e396917219ce53, type: 3}
+  m_PrefabInstance: {fileID: 929494265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &929494268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929494267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b50f293340fc25144aca433759b3cb5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RosRobotBridge
+  cmdVelTopic: /tardigrade/cmd_vel
+  odometryTopic: /tardigrade/state/odometry
+  statusTopic: /tardigrade/status
+  odomFrameId: odom
+  baseFrameId: base_link
+  linearSpeed: 1
+  yawSpeed: 1
+  cmdTimeoutSec: 0.5
+  publishRateHz: 30
 --- !u!1001 &1580941680
 PrefabInstance:
   m_ObjectHideFlags: 0
