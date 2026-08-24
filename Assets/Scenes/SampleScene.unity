@@ -383,6 +383,60 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &586582073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 586582075}
+  - component: {fileID: 586582074}
+  m_Layer: 0
+  m_Name: TardigradeRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &586582074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586582073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b50f293340fc25144aca433759b3cb5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RosRobotBridge
+  cmdVelTopic: /tardigrade/cmd_vel
+  odometryTopic: /tardigrade/state/odometry
+  statusTopic: /tardigrade/status
+  odomFrameId: odom
+  baseFrameId: base_link
+  linearSpeed: 1
+  yawSpeed: 1
+  cmdTimeoutSec: 0.5
+  publishRateHz: 30
+--- !u!4 &586582075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586582073}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.036322117, y: 3.2124774, z: 23.261377}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 929494266}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +492,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 586582075}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       propertyPath: m_LocalScale.x
@@ -454,31 +508,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.85
+      value: -2.886322
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.336
+      value: 0.12352252
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.03
+      value: 0.23137665
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -515,42 +569,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
       insertIndex: -1
       addedObject: {fileID: 98932522}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1230138d2f421ff439e396917219ce53, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 929494268}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1230138d2f421ff439e396917219ce53, type: 3}
 --- !u!4 &929494266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1230138d2f421ff439e396917219ce53, type: 3}
   m_PrefabInstance: {fileID: 929494265}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &929494267 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1230138d2f421ff439e396917219ce53, type: 3}
-  m_PrefabInstance: {fileID: 929494265}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &929494268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929494267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b50f293340fc25144aca433759b3cb5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RosRobotBridge
-  cmdVelTopic: /tardigrade/cmd_vel
-  odometryTopic: /tardigrade/state/odometry
-  statusTopic: /tardigrade/status
-  odomFrameId: odom
-  baseFrameId: base_link
-  linearSpeed: 1
-  yawSpeed: 1
-  cmdTimeoutSec: 0.5
-  publishRateHz: 30
 --- !u!1001 &1580941680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -660,5 +685,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 929494265}
   - {fileID: 1580941680}
+  - {fileID: 586582075}
