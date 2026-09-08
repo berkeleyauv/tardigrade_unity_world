@@ -1,0 +1,366 @@
+{
+  "buoyancy_elements": [
+    {
+      "height_m": 0.08,
+      "position_m": [
+        0.14,
+        0.09,
+        0.025
+      ],
+      "volume_m3": 0.00505
+    },
+    {
+      "height_m": 0.08,
+      "position_m": [
+        0.14,
+        -0.09,
+        0.025
+      ],
+      "volume_m3": 0.00505
+    },
+    {
+      "height_m": 0.08,
+      "position_m": [
+        -0.14,
+        0.09,
+        0.025
+      ],
+      "volume_m3": 0.00505
+    },
+    {
+      "height_m": 0.08,
+      "position_m": [
+        -0.14,
+        -0.09,
+        0.025
+      ],
+      "volume_m3": 0.00505
+    }
+  ],
+  "generated": {
+    "sha256": "30f862bfdbe66e08fef9c75c8ef0446187f43454e42c53490d6dd37c61e31c77",
+    "source": "tardigrade_description/config/vehicle.json"
+  },
+  "hydrodynamics": {
+    "linear_damping": [
+      15.0,
+      25.0,
+      35.0,
+      1.2,
+      1.8,
+      2.0
+    ],
+    "quadratic_damping": [
+      35.0,
+      55.0,
+      70.0,
+      2.2,
+      3.0,
+      3.5
+    ]
+  },
+  "rigid_body": {
+    "added_inertia_kg_m2": [
+      0.04,
+      0.08,
+      0.1
+    ],
+    "added_mass_kg": [
+      5.0,
+      9.0,
+      12.0
+    ],
+    "center_of_buoyancy_m": [
+      0.0,
+      0.0,
+      0.025
+    ],
+    "center_of_mass_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "collision_size_m": [
+      0.46,
+      0.29,
+      0.22
+    ],
+    "displaced_volume_m3": 0.0202,
+    "inertia_kg_m2": [
+      0.221,
+      0.433,
+      0.493
+    ],
+    "mass_kg": 20.0
+  },
+  "schema_version": 1,
+  "sensors": [
+    {
+      "bias_walk_stddev": [
+        0.0004,
+        3e-05
+      ],
+      "dropout_probability": 0.0,
+      "frame_id": "imu_link",
+      "jitter_s": 0.001,
+      "latency_s": 0.01,
+      "name": "imu",
+      "noise_stddev": [
+        0.02,
+        0.0015
+      ],
+      "position_m": [
+        -0.035,
+        0.145,
+        0.0
+      ],
+      "rate_hz": 100.0,
+      "rpy_rad": [
+        0.0,
+        3.14159265,
+        0.0
+      ]
+    },
+    {
+      "bias_walk_stddev": [
+        0.25
+      ],
+      "dropout_probability": 0.0,
+      "frame_id": "pressure_link",
+      "jitter_s": 0.002,
+      "latency_s": 0.02,
+      "name": "pressure",
+      "noise_stddev": [
+        25.0
+      ],
+      "position_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rate_hz": 30.0,
+      "rpy_rad": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "bias_walk_stddev": [
+        0.0005,
+        0.0002
+      ],
+      "dropout_probability": 0.01,
+      "frame_id": "zed_camera_link",
+      "jitter_s": 0.005,
+      "latency_s": 0.07,
+      "name": "visual_odometry",
+      "noise_stddev": [
+        0.01,
+        0.005
+      ],
+      "position_m": [
+        0.3,
+        0.0,
+        -0.05
+      ],
+      "rate_hz": 30.0,
+      "rpy_rad": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "baseline_m": 0.12,
+      "dropout_probability": 0.0,
+      "frame_id": "zed_camera_link",
+      "horizontal_fov_deg": 90.0,
+      "jitter_s": 0.002,
+      "latency_s": 0.05,
+      "name": "front_stereo",
+      "position_m": [
+        0.3,
+        0.0,
+        -0.05
+      ],
+      "rate_hz": 15.0,
+      "resolution": [
+        1280,
+        720
+      ],
+      "rpy_rad": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "thrusters": [
+    {
+      "axis": [
+        0.70710678,
+        -0.70710678,
+        0.0
+      ],
+      "command_delay_s": 0.03,
+      "deadband": 0.05,
+      "max_forward_n": 50.0,
+      "max_reverse_n": 40.0,
+      "name": "front_left_horizontal",
+      "position_m": [
+        0.18,
+        0.12,
+        0.0
+      ],
+      "slot": 1,
+      "time_constant_s": 0.15
+    },
+    {
+      "axis": [
+        0.70710678,
+        -0.70710678,
+        0.0
+      ],
+      "command_delay_s": 0.03,
+      "deadband": 0.05,
+      "max_forward_n": 50.0,
+      "max_reverse_n": 40.0,
+      "name": "rear_right_horizontal",
+      "position_m": [
+        -0.18,
+        -0.12,
+        0.0
+      ],
+      "slot": 2,
+      "time_constant_s": 0.15
+    },
+    {
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "command_delay_s": 0.03,
+      "deadband": 0.05,
+      "max_forward_n": 45.0,
+      "max_reverse_n": 36.0,
+      "name": "front_left_vertical",
+      "position_m": [
+        0.18,
+        0.12,
+        0.0
+      ],
+      "slot": 3,
+      "time_constant_s": 0.15
+    },
+    {
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "command_delay_s": 0.03,
+      "deadband": 0.05,
+      "max_forward_n": 45.0,
+      "max_reverse_n": 36.0,
+      "name": "rear_left_vertical",
+      "position_m": [
+        -0.18,
+        0.12,
+        0.0
+      ],
+      "slot": 4,
+      "time_constant_s": 0.15
+    },
+    {
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "command_delay_s": 0.03,
+      "deadband": 0.05,
+      "max_forward_n": 45.0,
+      "max_reverse_n": 36.0,
+      "name": "rear_right_vertical",
+      "position_m": [
+        -0.18,
+        -0.12,
+        0.0
+      ],
+      "slot": 5,
+      "time_constant_s": 0.15
+    },
+    {
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "command_delay_s": 0.03,
+      "deadband": 0.05,
+      "max_forward_n": 45.0,
+      "max_reverse_n": 36.0,
+      "name": "front_right_vertical",
+      "position_m": [
+        0.18,
+        -0.12,
+        0.0
+      ],
+      "slot": 6,
+      "time_constant_s": 0.15
+    },
+    {
+      "axis": [
+        0.70710678,
+        0.70710678,
+        0.0
+      ],
+      "command_delay_s": 0.03,
+      "deadband": 0.05,
+      "max_forward_n": 50.0,
+      "max_reverse_n": 40.0,
+      "name": "front_right_horizontal",
+      "position_m": [
+        0.18,
+        -0.12,
+        0.0
+      ],
+      "slot": 7,
+      "time_constant_s": 0.15
+    },
+    {
+      "axis": [
+        0.70710678,
+        0.70710678,
+        0.0
+      ],
+      "command_delay_s": 0.03,
+      "deadband": 0.05,
+      "max_forward_n": 50.0,
+      "max_reverse_n": 40.0,
+      "name": "rear_left_horizontal",
+      "position_m": [
+        -0.18,
+        0.12,
+        0.0
+      ],
+      "slot": 8,
+      "time_constant_s": 0.15
+    }
+  ],
+  "vehicle_id": "tardigrade",
+  "water": {
+    "atmospheric_pressure_pa": 101325.0,
+    "current_body_initial_m_s": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "density_kg_m3": 1000.0,
+    "gravity_m_s2": 9.80665,
+    "surface_enu_z_m": 0.0,
+    "surface_unity_y_m": 4.0
+  }
+}

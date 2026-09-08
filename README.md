@@ -35,48 +35,62 @@ for `path_follower` and mission usage. Nothing on the ROS side needs to know
 whether it's talking to Unity or the fake backend; the topic contract is
 identical.
 
-## `RosRobotBridge.cs` — How Movement Works
+## How The Unity Scene Is Split
 
-`Assets/Scripts/RosRobotBridge.cs`, attached to the `tardigrade` root
-GameObject in `SampleScene`, is the whole simulator backend on the Unity
-side. It:
+`SampleScene` uses a hybrid authored/runtime layout. Physical arrangement and
+appearance are visible in Edit Mode; scripts configure changing scenario state
+when Play Mode begins.
 
-- subscribes `/tardigrade/cmd_vel` and stores the latest command,
-- integrates a **kinematic** pose each `FixedUpdate` (no Rigidbody/physics
-  yet — see `IntegrateMotion`), the same model as
-  `tardigrade_sim/fake_unity_backend.py`,
-- applies that pose to the GameObject's transform (`ApplyPoseToTransform`,
-  which handles the ROS ↔ Unity axis conversion),
-- publishes `/tardigrade/state/odometry` and `/tardigrade/status`,
-- answers the `/tardigrade/set_armed` and `/tardigrade/set_external_control`
-  services.
+```text
+SampleScene
+├── SimulationEnvironment
+│   ├── AcceptancePoolCollisions  (PoolEnvironment prefab)
+│   ├── GateAcceptance            (Gate prefab)
+│   └── UnderwaterEffects         (water, pool lights, particulate)
+└── TardigradeRoot
+    ├── Rigidbody + collider
+    ├── RosRobotBridge + AuvPhysicsPlant
+    ├── UnderwaterEnvironment + StereoCameraPublisher
+    ├── Sensors                    (inspectable sensor mounting frames)
+    └── tardigrade                 (visual FBX model)
+```
 
-To change how the robot moves in response to `cmd_vel`, edit the Inspector
-fields on the `RosRobotBridge` component (no code changes needed for basic
-tuning):
+The imported lowercase `tardigrade` is presentation only. `TardigradeRoot`
+owns the one Rigidbody and the vehicle transform, preventing individual FBX
+mesh pieces from becoming separate physical bodies.
 
-| Field | Effect |
-|---|---|
-| `Linear Speed` | m/s at a full (`±1.0`) linear `cmd_vel` command. |
-| `Yaw Speed` | rad/s at a full (`±1.0`) angular.z command. |
-| `Cmd Timeout Sec` | Robot stops if `cmd_vel` goes stale for this long. |
-| `Publish Rate Hz` | How often odometry/status are published. |
+The pool, gate, water, lighting, particle system, robot collider, and sensor
+mounts are saved in the scene or under `Assets/Prefabs/Simulation`. Runtime
+scripts still own:
 
-To change the *shape* of motion (e.g. add drag, acceleration limits, or
-switch to real Rigidbody/buoyancy physics), edit `IntegrateMotion()` — it is
-the single method that turns a `cmd_vel` into a pose delta each physics
-tick. Everything downstream (`ApplyPoseToTransform`, odometry publishing)
-stays the same regardless of how the pose is computed.
+- scenario selection and reset pose,
+- water current and visual profile,
+- sensor noise, delay, drift, and dropout,
+- thruster state and failures,
+- ROS transport and simulation clock,
+- temporary left/right camera renderers.
 
-**This script does not define paths.** Paths (waypoint sequences, gate
-missions, etc.) live entirely on the ROS side in `tardigrade_ws` and drive
-the robot purely through `/tardigrade/cmd_vel` — see the `path_follower`
-docs linked above to build or customize a path. Nothing in Unity needs to
-change to run a different path.
+`RosRobotBridge` is the composition and ROS lifecycle component.
+`AuvPhysicsPlant` applies buoyancy, six-axis damping, and distributed thruster
+forces to the serialized Rigidbody at 100 Hz. Canonical physical values come
+from `Assets/StreamingAssets/tardigrade_vehicle.json`, rather than being copied
+into scene objects.
+
+The Scene view is the free editor camera. The Game view is the output of the
+vehicle-mounted camera, so the two views are expected to look different.
+
+To rebuild the authored assets after changing their procedural templates, use
+**Tardigrade → Rebuild Authored Simulation Scene**. This recreates the three
+simulation prefabs and their materials, reconnects `SampleScene`, and is safe to
+run repeatedly.
+
+Mission paths and control remain on the ROS side. Unity consumes normalized
+per-thruster commands and publishes raw simulated sensors and simulation-only
+ground truth.
 
 ## `Assets/Editor/` CLI Helpers
 
-Two headless-automation scripts, useful for CI or re-running setup without
+Headless-automation scripts, useful for CI or re-running setup without
 opening the Editor UI (`Unity.exe -batchmode -nographics -quit -projectPath
 <proj> -executeMethod <Class>.<Method>`):
 
@@ -87,3 +101,8 @@ opening the Editor UI (`Unity.exe -batchmode -nographics -quit -projectPath
   lists the scene hierarchy, or finds the GameObject named `tardigrade` and
   attaches `RosRobotBridge` to it, saving the scene. Useful after rebuilding
   the scene from a new robot model import.
+- `SimulationSceneAuthoring.Run`: rebuilds the simulator prefabs, materials,
+  sensor mounts, and serialized scene references.
+- `SimulationBatchValidation.Run`: validates configuration and coordinate/frame
+  assumptions.
+- `SimulationPlayModeValidation.Run`: runs the acceptance-scene smoke test.

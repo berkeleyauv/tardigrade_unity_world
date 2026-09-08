@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
 using UnityEditor;
@@ -24,3 +25,4 @@ public class MaterialRandomizer : Editor
         }
     }
 }
+#endif
